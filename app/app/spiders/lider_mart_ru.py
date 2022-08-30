@@ -25,15 +25,15 @@ class LiderMartRuSpider(scrapy.Spider):
         table = {}
 
         for tr in response.css('.product_description table.description tr'):
-            key = tr.css('.description_left div::text').get().strip()
-            val = tr.css('.description_right div *::text').get()
+            key = strip_markup(tr.css('.description_left').get().strip())
+            val = strip_markup(tr.css('.description_right').get())
 
             if isinstance(val, str):
                 table[key] = val.strip()
         
         return table
 
-    def parse_description_under_tabs(self, response):
+    def parse_text_under_tabs(self, response):
         tabs = response.css('.product_description_full .title li::text').getall()
 
         table = {}
@@ -52,7 +52,7 @@ class LiderMartRuSpider(scrapy.Spider):
 
     def parse_product(self, response):
         description = self.parse_description_table(response)
-        tabs = self.parse_description_under_tabs(response)
+        tabs = self.parse_text_under_tabs(response)
 
         p = Product()
         p['volume'] = description.get('Объём:', None)
