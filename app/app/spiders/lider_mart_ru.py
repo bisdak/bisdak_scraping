@@ -65,6 +65,8 @@ class LiderMartRuSpider(scrapy.Spider):
         p['currency'] = response.css('meta[itemprop=priceCurrency]::attr(content)').get()
 
         p['source'] = response.url
+        p['images'] = set(response.css('.product_image a[rel="picture"]::attr(href)').getall())
+
 
         product_id = response.css('#dataEncryptionProductID::attr(value)').get()
         encryption_key = response.css('#dataEncryptionKey::attr(value)').get()
