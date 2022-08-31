@@ -13,7 +13,4 @@ class Product(scrapy.Item):
     composition = scrapy.Field()
     images = scrapy.Field()
     source = scrapy.Field()
-
     currency = scrapy.Field()
-    product_id = scrapy.Field()
-    encryption_key = scrapy.Field()
