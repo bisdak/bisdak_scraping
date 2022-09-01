@@ -10,6 +10,9 @@ class LiderMartRuSpider(scrapy.Spider):
     allowed_domains = ['lider-mart.ru']
 
     def start_requests(self):
+        # url = 'https://www.lider-mart.ru/sitemap.xml'
+        # yield scrapy.Request(url, callback=self.parse_sitemap)
+      
         category_ids = [1106, 2841]
         sesderma_group_id = 5667
 
