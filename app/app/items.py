@@ -2,7 +2,6 @@ import scrapy
 
 
 class Product(scrapy.Item):
-    generated_id = scrapy.Field()
     title = scrapy.Field()
     product_line = scrapy.Field()
     volume = scrapy.Field()
@@ -12,5 +11,5 @@ class Product(scrapy.Item):
     barcode = scrapy.Field()
     composition = scrapy.Field()
     images = scrapy.Field()
-    source = scrapy.Field()
+    url = scrapy.Field()
     currency = scrapy.Field()

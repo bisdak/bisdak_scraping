@@ -1,11 +1,7 @@
-# Scrapy settings for app project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     https://docs.scrapy.org/en/latest/topics/settings.html
-#     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
 
 BOT_NAME = 'app'
 
@@ -30,6 +26,7 @@ DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
+REACTOR_THREADPOOL_MAXSIZE=8
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
@@ -65,6 +62,7 @@ DOWNLOAD_DELAY = 1
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'app.pipelines.AppPipeline': 300,
+   'app.pipelines.PsqlPipeline': 999,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -91,3 +89,9 @@ ITEM_PIPELINES = {
 FEED_EXPORTERS = {
     'xlsx': 'scrapy_xlsx.XlsxItemExporter',
 }
+
+POSTGRES_USER = os.getenv('POSTGRES_USER')
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+POSTGRES_HOST = os.getenv('POSTGRES_HOST')
+POSTGRES_DB = os.getenv('POSTGRES_DB')
+POSTGRES_PORT = os.getenv('POSTGRES_PORT')

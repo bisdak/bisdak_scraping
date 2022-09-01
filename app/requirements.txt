@@ -31,6 +31,7 @@ pexpect==4.8.0
 pickleshare==0.7.5
 prompt-toolkit==3.0.30
 Protego==0.2.1
+psycopg2-binary==2.9.3
 ptyprocess==0.7.0
 pure-eval==0.2.2
 pyasn1==0.4.8
@@ -39,6 +40,7 @@ pycparser==2.21
 PyDispatcher==2.0.5
 Pygments==2.13.0
 pyOpenSSL==22.0.0
+python-dotenv==0.20.0
 queuelib==1.6.2
 requests==2.28.1
 requests-file==1.5.1

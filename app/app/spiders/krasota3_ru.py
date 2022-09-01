@@ -21,7 +21,7 @@ class Krasota3RuSpider(scrapy.Spider):
             yield scrapy.Request(url, cookies={'beget': 'begetok'}, callback=self.parse_main)
 
     def parse_main(self, response):
-        for category_link in response.css('.product a::attr(href)').getall()[:1]:
+        for category_link in response.css('.product a::attr(href)').getall():
             link = self.domain+category_link
             yield scrapy.Request(link, cookies={'beget': 'begetok'}, callback=self.parse_category)
 
@@ -45,11 +45,11 @@ class Krasota3RuSpider(scrapy.Spider):
         p['title'] = response.css('h1.heading::text').get()
         p['product_line'] = response.css('.breadcrumb li span[itemprop=name]::text').getall()[-2]
         
-        p['images'] = self.domain + response.css('#image-block .img-responsive::attr(src)').get()
+        p['images'] = response.css('#image-block .img-responsive::attr(src)').get()
 
         p['barcode'] = None
         p['composition'] = None
-        p['source'] = response.url
+        p['url'] = response.url
         p['currency'] = None
 
         description_titles = response.css('.text-content h2::text')
@@ -67,7 +67,7 @@ class Krasota3RuSpider(scrapy.Spider):
 
         p['weight'] = None
         for label in response.css('.form-group .flex label'):
-            p['price'] = label.css('span::text').get()
+            p['price'] = label.css('span::text').get().replace(' ', '')
             p['volume'] = label.css(':not(span) *::text').getall()[-1].strip()
 
             yield p
